@@ -1,6 +1,6 @@
 {
   "name": "nest-google-sheet-connector",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A Google Sheet integration for NestJs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
