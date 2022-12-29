@@ -1,6 +1,7 @@
 import {DynamicModule, Module} from "@nestjs/common";
 import GoogleSheetConnectorDto from "./dto/google-sheet-connector.dto";
 import {GoogleSheetConnectorService} from "./google-sheet-connector.service";
+import {GoogleAuthService} from "./google-auth-service";
 
 @Module({})
 export class GoogleSheetModule {
@@ -13,8 +14,10 @@ export class GoogleSheetModule {
                     useValue: options,
                 },
                 GoogleSheetConnectorService,
+                GoogleAuthService
             ],
-            exports: [GoogleSheetConnectorService],
+            imports: [],
+            exports: [GoogleSheetConnectorService, GoogleAuthService],
         }
     }
 }
