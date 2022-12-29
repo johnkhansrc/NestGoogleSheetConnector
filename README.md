@@ -28,7 +28,7 @@ To use this module you will need:
 
 ## Install the module
 ```
-npm install --save xxxxxxxxx
+npm install --save nest-google-sheet-connector
 ```
 
 ## Provide the module with the credentials of the google cloud service account
