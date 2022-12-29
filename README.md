@@ -53,3 +53,47 @@ export class AppModule {}
 >If you want only to allow the account read access to the spreadsheet, assign it the `Viewer` role instead.
 
 4. Take note of the ID of the Google Sheet document, which is contained in its URL, after the  `/d`  element. So, for example, if the URL of your document is  `https://docs.google.com/spreadsheets/d/1234567890123abcf/edit#gid=0`, the ID will be  `1234567890123abcf`.
+
+# Documentation
+## Inject the service into a constructor
+```ts
+import { GoogleSheetConnectorService } from '../../lib/nest-google-sheet-connector';
+
+@Injectable()  
+export class AppService {  
+  constructor(private googleSheetConnectorService: GoogleSheetConnectorService) {}  
+}
+```
+This service contain google sheet providers methods
+## Features
+['feature'](ressources/img.png)
+## Troubleshooting
+Google Cloud requires an SSL certificate for API requests.
+Here is how to certify your local environment under NestJs:
+
+1. Get your certificate
+ ```
+ openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+ ```
+2. Modify the NestFactory in the src/main.ts file
+ ```ts
+import { NestFactory } from '@nestjs/core';  
+import { AppModule } from './app.module';  
+  
+async function bootstrap() {  
+  const fs = require('fs');  
+ const keyFile = fs.readFileSync(__dirname + '/../localhost.key');  
+ const certFile = fs.readFileSync(__dirname + '/../localhost.crt');  
+ const app = await NestFactory.create(AppModule, {  
+    httpsOptions: {  
+      key: keyFile,  
+	  cert: certFile,  
+    },  
+  });  
+ await app.listen(3000);  
+}  
+bootstrap();
+ ```
