@@ -66,7 +66,7 @@ export class AppService {
 ```
 This service contain google sheet providers methods
 ## Features
-['feature'](ressources/img.png)
+![img.png](img.png)[]('https://github.com/johnkhansrc/NestGoogleSheetConnector/blob/main/ressources/img.png')
 ## Troubleshooting
 Google Cloud requires an SSL certificate for API requests.
 Here is how to certify your local environment under NestJs:
