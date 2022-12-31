@@ -28,7 +28,8 @@ export class GoogleSheetModule {
             providers: [
                 {
                     provide: 'GOOGLE_SHEET_CONNECTOR',
-                    useValue: options.inject,
+                    useFactory: options.useFactory,
+                    inject: options.inject,
                 },
                 GoogleSheetConnectorService,
                 GoogleAuthService
