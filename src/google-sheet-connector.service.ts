@@ -153,7 +153,7 @@ export class GoogleSheetConnectorService{
         return await sheets.spreadsheets.values.update({
             spreadsheetId,
             range,
-            valueInputOption: 'USER_ENTER',
+            valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values
             }
