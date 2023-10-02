@@ -130,7 +130,7 @@ export class GoogleSheetConnectorService{
      */
     async readCell(spreadsheetId: string,cell: string): Promise<any> {
 
-        const range = this.readRange(spreadsheetId, cell);
+        const range = await this.readRange(spreadsheetId, cell);
 
         return range[0][0];
     }
@@ -153,7 +153,7 @@ export class GoogleSheetConnectorService{
         return await sheets.spreadsheets.values.update({
             spreadsheetId,
             range,
-            valueInputOption: 'USER_ENTER',
+            valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values
             }
