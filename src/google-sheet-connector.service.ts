@@ -146,14 +146,15 @@ export class GoogleSheetConnectorService{
      */
     async writeRange(spreadsheetId: string,
                      range: string,
-                     values: any[][]): GaxiosPromise<sheets_v4.Schema$UpdateValuesResponse> {
+                     values: any[][],
+                     valueInputOption = 'USER_ENTERED'): GaxiosPromise<sheets_v4.Schema$UpdateValuesResponse> {
 
         const sheets = this.getGoogleSheetConnect()
 
         return await sheets.spreadsheets.values.update({
             spreadsheetId,
             range,
-            valueInputOption: 'USER_ENTERED',
+            valueInputOption,
             requestBody: {
                 values
             }
@@ -205,14 +206,15 @@ export class GoogleSheetConnectorService{
      */
     async addRow(spreadsheetId: string,
                  range: string,
-                 values: any[][]): GaxiosPromise<sheets_v4.Schema$AppendValuesResponse> {
+                 values: any[][],
+                 valueInputOption = 'USER_ENTERED'): GaxiosPromise<sheets_v4.Schema$AppendValuesResponse> {
 
         const sheets = this.getGoogleSheetConnect()
 
         return await sheets.spreadsheets.values.append({
             spreadsheetId,
             range,
-            valueInputOption: 'USER_ENTER',
+            valueInputOption,
             requestBody: {
                 values
             }
@@ -354,7 +356,7 @@ export class GoogleSheetConnectorService{
             });
     }
 
-    async appendRow(spreedsheatId, sheet, rows) {
+    async appendRow(spreedsheatId, sheet, rows, valueInputOption = 'USER_ENTERED', insertDataOption = 'INSERT_ROWS') {
         // Initialize request parameters
         const request = {
             spreadsheetId: spreedsheatId,
@@ -362,8 +364,8 @@ export class GoogleSheetConnectorService{
             resource: {
                 values: rows,
             },
-            valueInputOption: 'USER_ENTERED',
-            insertDataOption: 'INSERT_ROWS',
+            valueInputOption,
+            insertDataOption,
         };
 
         return await this.getGoogleSheetConnect().spreadsheets.values.append(request);
